@@ -9,9 +9,10 @@
 </head>
 
 <body>
-    <nav style="background: #eee; padding: 10px; margin-bottom: 20px;">
-        <a href="{{ route('produk.index') }}" style="margin-right: 15px; font-weight: bold;">Lihat Semua Produk</a>
-        <a href="{{ route('produk.tambah') }}">Tambah Produk Baru</a>
+    <nav style="background: #eee; padding: 10px; margin-bottom: 20px; display: flex; gap: 15px;">
+        <a href="/dashboard" style="color: green; font-weight: bold;">🏠 Dashboard Utama</a>
+        <a href="{{ route('produk.index') }}">📦 Lihat Semua Produk</a>
+        <a href="{{ route('produk.tambah') }}">➕ Tambah Produk Baru</a>
     </nav>
 
     <h1>Daftar Barang Toko</h1>

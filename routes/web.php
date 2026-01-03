@@ -3,19 +3,24 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\KatalogController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [KatalogController::class, 'index'])->name('katalog.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth', 'role:admin')->group(function () {
+
+// 1. GRUP PERTAMA: Siapa saja yang sudah LOGIN boleh masuk
+Route::middleware('auth')->group(function () {
+    // Pelanggan DAN Admin bisa akses ini
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
     // Halaman untuk melihat form
     Route::get('/admin/produk/tambah', function () {
         return view('admin.tambah_produk');

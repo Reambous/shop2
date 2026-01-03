@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Dashboard</title>
 </head>
 
 <body>
@@ -21,16 +21,24 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
                         {{ __("You're logged in!") }}
+                        @if (auth()->user()->role == 'admin')
+                            <div class="mt-4">
+                                <a href="{{ route('produk.index') }}"
+                                    style="background: #4A90E2; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+                                    Masuk ke Manajemen Produk (Admin)
+                                </a>
+                            @else
+                                <br>
+                                <a href="{{ route('katalog.index') }}" style="color: blue;">
+                                    🛍️ Mulai Belanja (Lihat Katalog)
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
-        @if (auth()->user()->role == 'admin')
-            <a href="{{ route('produk.index') }}">Menu Admin (Kelola Toko)</a>
-        @else
-            <p>Selamat Datang, Pelanggan!</p>
-            <a href="/katalog">Lihat Produk</a>
-        @endif
+
     </x-app-layout>
 
 </body>
