@@ -10,5 +10,5 @@ class Product extends Model
     use HasFactory;
 
     // Tambahkan baris ini:
-    protected $fillable = ['nama_produk', 'deskripsi', 'harga', 'stok'];
+    protected $fillable = ['nama_produk', 'deskripsi', 'harga', 'stok', 'foto'];
 }

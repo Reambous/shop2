@@ -16,11 +16,14 @@
     </nav>
 
     <h1>Form Tambah Produk</h1>
-    <form action="{{ route('produk.simpan') }}" method="POST">
+    <form action="{{ route('produk.simpan') }}" method="POST" enctype="multipart/form-data">
         @csrf <input type="text" name="nama_produk" placeholder="Nama Barang">
         <textarea name="deskripsi" placeholder="Deskripsi"></textarea>
         <input type="number" name="harga" placeholder="Harga">
         <input type="number" name="stok" placeholder="Stok">
+        <label>Foto Produk:</label>
+        <input type="file" name="foto">
+        <br>
         <button type="submit">Simpan Produk</button>
     </form>
 

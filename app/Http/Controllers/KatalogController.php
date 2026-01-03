@@ -16,4 +16,10 @@ class KatalogController extends Controller
         // Mengirim data ke view katalog
         return view('katalog', compact('products'));
     }
+
+    public function show(Product $product)
+    {
+        // Kita tampilkan halaman detail dan kirim data produknya
+        return view('detail_produk', compact('product'));
+    }
 }

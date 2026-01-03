@@ -21,6 +21,9 @@
         <textarea name="deskripsi">{{ $product->deskripsi }}</textarea>
         <input type="number" name="harga" value="{{ $product->harga }}">
         <input type="number" name="stok" value="{{ $product->stok }}">
+        <label>Foto Produk:</label>
+        <input type="file" name="foto">
+        <br>
 
         <button type="submit">Simpan Perubahan</button>
     </form>

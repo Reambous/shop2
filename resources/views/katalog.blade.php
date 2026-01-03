@@ -59,6 +59,13 @@
         <div class="grid">
             @foreach ($products as $produk)
                 <div class="card">
+                    @if ($produk->foto)
+                        <img src="{{ asset('storage/produk/' . $produk->foto) }}" alt="foto"
+                            style="width: 100%; height: 150px; object-fit: cover;">
+                    @else
+                        <img src="https://via.placeholder.com/150" alt="no-image" style="width: 100%;">
+                    @endif
+
                     <h3>{{ $produk->nama_produk }}</h3>
                     <p>{{ $produk->deskripsi }}</p>
                     <p class="harga">Rp {{ number_format($produk->harga) }}</p>

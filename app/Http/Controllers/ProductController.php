@@ -32,16 +32,26 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // 1. Ambil data dari form dan masukkan ke database
-        \App\Models\Product::create([
-            'nama_produk' => $request->nama_produk,
-            'deskripsi' => $request->deskripsi,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
+        // 1. Validasi (Opsional tapi baik: pastikan yang diupload itu gambar)
+        $request->validate([
+            'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        // Sekarang kita arahkan ke halaman daftar produk
-        return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan!');
+        // 2. Ambil semua data inputan kecuali foto
+        $data = $request->all();
+
+        // 3. Proses Upload Foto jika ada
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $nama_file = time() . "_" . $file->getClientOriginalName();
+            $file->storeAs('produk', $nama_file, 'public'); // Simpan ke storage
+            $data['foto'] = $nama_file; // Masukkan nama file ke array data
+        }
+
+        // 4. Simpan ke database
+        \App\Models\Product::create($data);
+
+        return redirect()->route('produk.index');
     }
 
     /**
